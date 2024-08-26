@@ -1,16 +1,40 @@
 ---
+import Navbar from "../components/Navbar.astro"
 
+// Server Only
+const name = 'Noel Sariñena Varela'
+const title = 'Home page'
 ---
 
-<html lang="en">
+<html lang="es">
 	<head>
 		<meta charset="utf-8" />
 		<link rel="icon" type="image/svg+xml" href="/favicon.svg" />
 		<meta name="viewport" content="width=device-width" />
 		<meta name="generator" content={Astro.generator} />
-		<title>Astro</title>
+		<title>{title}</title>
 	</head>
 	<body>
-		<h1>Astro</h1>
+		<Navbar />
+
+		<h1>{name}</h1>
+
+		<p>Momento actual: { new Date().toLocaleTimeString()}</p>
+		<p id='current-time'></p>
+
+		<footer>
+			Año: 2023
+		</footer>
+
+		<script>
+			// Client only
+			const footer = document.querySelector('footer') as HTMLElement;
+			const currentTime = document.querySelector('#current-time') as HTMLElement;
+			
+			const currentYear:number = new Date().getFullYear() 
+			footer.innerHTML = `Current year: ${ currentYear }`
+			
+			currentTime.innerText = `Momento actual real: ${ new Date().toLocaleTimeString() }`
+		</script>
 	</body>
 </html>
