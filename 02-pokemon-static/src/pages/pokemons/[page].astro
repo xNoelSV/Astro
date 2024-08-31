@@ -5,12 +5,11 @@ import PokemonCard from "../../components/pokemons/PokemonCard.astro";
 import type { PokemonListResponse } from '../../interfaces/pokemon-list.response'
 import MainLayout from "../../layouts/MainLayout.astro";
 
-export const getStaticPaths = ( async({ paginate }) => {
-
+export const getStaticPaths = (async ({ paginate }) => {
   const resp = await fetch('https://pokeapi.co/api/v2/pokemon?limit=151');
-  const { results } = await resp.json() as PokemonListResponse;
-  
-  return paginate( results, { pageSize: 20 });
+  const { results } = (await resp.json()) as PokemonListResponse;
+
+  return paginate(results, { pageSize: 20 });
 }) satisfies GetStaticPaths;
 
 const title = "Pokémon Static | Home"
