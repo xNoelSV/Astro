@@ -22,5 +22,6 @@
       "@interfaces/*": ["src/interfaces/*"],
       "@consts/*": ["src/consts/*"],
     },
-  },
+    "types": ["astro/client"]
+  }
 }

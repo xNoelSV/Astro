@@ -1,5 +1,4 @@
 ---
-// Código Server Side Only - Momento de construcción BUILD TIME
 import PokemonCard from '@components/pokemons/PokemonCard.astro';
 import type { PokemonListResponse } from '@interfaces/pokemon-list.response';
 
@@ -21,5 +20,4 @@ const title = 'Pokémon Static | Home';
   >
     {data.results.map(({ name, url }) => <PokemonCard name={name} url={url} />)}
   </section>
-
 </MainLayout>
