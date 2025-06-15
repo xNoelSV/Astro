@@ -27,15 +27,16 @@ const audioSrc = `https://raw.githubusercontent.com/PokeAPI/cries/main/cries/pok
 ---
 
 <MainLayout title="Algún pokemon">
+
   <section class="mt-10 mx-10 flex flex-col justify-center items-center">
     <div>
-      <a href="/">Volver</a>
+      <a href="javascript:window.history.back();">Volver</a>
       <h1 class="text-5xl capitalize">{ name }</h1>
     </div>
 
     <PokemonCard 
-      name={name}
-      url={url}
+      name={ name }
+      url={ url }
       isBig
     />
 
