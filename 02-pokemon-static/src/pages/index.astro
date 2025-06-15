@@ -21,4 +21,6 @@ const title = "Pokémon Static | Home"
     {data.results.map(({ name, url }) => <PokemonCard name={name} url={url} />)}
   </section>
 
+  <slot />
+
 </MainLayout>

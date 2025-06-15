@@ -1,15 +1,13 @@
 ---
 import type { GetStaticPaths } from "astro";
-import type { PokemonListResponse } from "../../interfaces/pokemon-list.response";
-import MainLayout from "../../layouts/MainLayout.astro";
-import PokemonCard from "../../components/pokemons/PokemonCard.astro";
+import type { PokemonListResponse } from "@interfaces/pokemon-list.response";
+import MainLayout from "@layouts/MainLayout.astro";
+import PokemonCard from "@components/pokemons/PokemonCard.astro";
 
 export const getStaticPaths = (async() => {
 
   const resp = await fetch('https://pokeapi.co/api/v2/pokemon?limit=151');
   const { results } = ( await resp.json() ) as PokemonListResponse;
-
-  console.log(results)
 
   return results.map( ({name, url}) => {
 
@@ -17,30 +15,27 @@ export const getStaticPaths = (async() => {
 
     return { 
       params: { id: id },
-      props: { name: name, url: url },
-    }
+      props: { url: url, name: name },
+    };
   });
-
 }) satisfies GetStaticPaths;
 
 const { id } = Astro.params;
-const { name, url } = Astro.props;
+const { url, name } = Astro.props;
 
 const audioSrc = `https://raw.githubusercontent.com/PokeAPI/cries/main/cries/pokemon/latest/${ id }.ogg`
-
 ---
 
 <MainLayout title="Algún pokemon">
-
   <section class="mt-10 mx-10 flex flex-col justify-center items-center">
     <div>
-      <a href="javascript:window.history.back();">Volver</a>
+      <a href="/">Volver</a>
       <h1 class="text-5xl capitalize">{ name }</h1>
     </div>
 
     <PokemonCard 
-      name={ name }
-      url={ url }
+      name={name}
+      url={url}
       isBig
     />
 
@@ -49,7 +44,6 @@ const audioSrc = `https://raw.githubusercontent.com/PokeAPI/cries/main/cries/pok
       Tu navegador no soporta elementos de audio
     </audio>
   </section>
-
 </MainLayout>
 
 <style>
