@@ -1,18 +1,17 @@
 ---
 interface Props {
-  name: string;
   url: string;
+  name: string;
   isBig?: boolean;
 }
 
-const { name, url, isBig=false } = Astro.props;
-
+const { name, url, isBig = false } = Astro.props;
 const id = url.split('/').at(-2);
-const imageSrc = `https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/other/official-artwork/${ id }.png`;
+const imageSrc = `https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/other/official-artwork/${id}.png`;
 ---
 
-<!-- class=`rounded flex flex-col justify-center items-center p-2 ${!isBig && 'border'}`> FUNCIONA PERO APLICA UNA CLASE "FALSE" -->
-<a 
+<!-- class={`rounded  flex flex-col justify-center items-center p-2 ${!isBig && 'border'}`} --><!-- href={`/pokemons/${name}`} --><!-- href={`/pokemon/${id}`} -->
+<a
   href={`/pokemons/${name}`}
   class:list={[
     `rounded flex flex-col justify-center items-center p-2`,
@@ -20,25 +19,28 @@ const imageSrc = `https://raw.githubusercontent.com/PokeAPI/sprites/master/sprit
       border: !isBig,
     },
   ]}
+>
+  <!-- w-26 h-26 isBig -->
+  <!-- w-16 h-16 !isBig -->
+  <img
+    transition:name={`${name}-image`}
+    class:list={[
+      {
+        'w-26 h-26': isBig,
+        'w-22 h-22': !isBig,
+      },
+    ]}
+    src={imageSrc}
+    alt={name}
+  />
 
+  <!-- text-3xl -->
+  <span
+    class:list={[
+      'capitalize',
+      {
+        'text-4xl text-blue-300': isBig,
+      },
+    ]}>#{id} {name}</span
   >
-    <img
-      transition:name={`${name}-image`}
-      class:list={[
-        { 
-          "w-26 h-26": isBig,
-          "w-22 h-22": !isBig 
-        }
-      ]}
-      src={ imageSrc }
-      alt=`Imagen de ${ name }`
-    />
-    <span 
-      class:list={[
-        `capitalize`, 
-        {
-          "text-4xl text-blue-300": isBig
-        }
-      ]}
-    >#{ id } { name }</span>
 </a>
